@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+<head>
+	<link rel="icon" href="favicon.ico">
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+
+<style>
+	rect:hover {fill:black;}
+</style>
+
+</head>
+<body>
+Select Chart Size:
+<select id="chartHeight">
+	<option value="300">300Pixels</option>
+	<option value="600">600Pixels</option>
+	<option value="900">900Pixels</option>
+</select>
+Select Chart Colour:
+<input id="colorpicker" type="color">
+<button onclick="drawChart()">Draw Chart</button>	
+<div id="myDiv"></div>
+</body>
+
+<script> 
+
+function drawChart(){
+	d3.csv("file.csv").then(function(data){console.log(data);
+
+	//values for chart, replace in code if in use
+//	var height = document.getElementById("chartHeight").value;
+//	var color = document.getElementById("colorpicker").value;
+	
+//d3.select("#myDiv").selectAll("*").remove();
+
+	//convert to numbers
+	data.forEach(function(d){d.complaints_received = Number(d.complaints_received);})
+
+	//create Y scale
+	var yScale = d3.scaleLinear()
+		.domain([0, d3.max(data, function(d){return d.complaints_received;})])
+		.range([300,0]);
+
+	//create y axis
+	//var yAxis = d3.axisLeft()
+	//	.scale(yScale);
+
+	//create X scale
+	var xScale = d3.scaleBand()
+		.domain(data.map(function(d){return d.month;}))
+		.range([252,0]);
+
+	//create X axis
+	//var xAxis = d3.axisBottom()
+	//	.scale(xScale);
+
+	// create the svg container using d3 select, append svg to div above
+		let svgContainer = d3.select("#myDiv").append("svg")
+		  .attr("width", 1500)
+		  .attr("height", 1500);
+
+		// create a variable and select all rectangles in svg containe as associate with data
+	   let myRectangle = svgContainer.selectAll("rect")
+		   .data(data);
+
+		//append y axis - transition into this?
+	//	svgContainer.append("g")
+	//		.attr("transform", "translate(45,0)")
+	//		.call(yAxis);
+		
+		//append x axis
+	//	svgContainer.append("g")
+	//		.attr("transform", "translate(50,300)")
+	//		.call(xAxis)
+		//	.selectAll("text")
+	//			.attr("transform","rotate(60)")
+	//			.attr("text-anchor", "start")
+	//			.attr("x", "9")
+	//			.attr("y", "3");
+
+		// using d3 enter method to add rectangles
+		myRectangle.enter()
+		   .append("rect")
+				//Start of transition
+				.attr("fill", "black")
+				.attr("x", function(d,i){
+				   return 50 + (i*21);})
+				.attr("y", 300)
+				.attr("width", 40)
+				
+				.transition()
+				.duration(3000)
+				
+				//after transition
+				.attr("x", function(d,i){
+				   return 50 + (i*21);
+				   })
+				.attr("y", function(d){return 300-yScale(d.complaints_received);})
+				.attr("width", 20)
+				.attr("height",function(d){
+				   return yScale(d.complaints_received);
+				   })
+				.attr("fill", function(d){
+					if (d.complaints_received <=200) {return "blue";}
+					else if (d.complaints_received <=300) {return "green";}
+					else if (d.complaints_received <=400) {return "orange";}
+					else {return "red";};}
+			);
+
+
+		//Add label text for Bar Chart
+		let mylabel = svgContainer.selectAll("text")
+			.data(data);
+
+		mylabel.enter()
+		   .append("text")
+			   .attr("x", function(d,i){
+				   return 50 + (i*21);
+				   })
+			   .attr("y", 300)
+
+				.transition()
+				.duration(2000)
+				.delay(3000)
+				.ease(d3.easeLinear)
+				
+			   .attr("x", function(d,i){
+				   return 50 + (i*21);
+				   })
+			   .attr("y", function(d){
+			   return 300-yScale(d.complaints_received);})
+			   .attr("text-anchor", "middle")
+			   .attr("font-family", "sans-serif")
+			   .attr("font-size", "20px")
+			   .attr("fill", "white")
+			   .text(function(d){
+			   return d.complaints_received;
+			   })
+			   
+			   //second transition
+				.transition()
+				.duration(3000)
+				.delay(function(d,i){return i*400;})
+				.ease(d3.easeBounceOut)
+				
+			   .attr("x", function(d,i){
+				   return 50 + (i*21);
+				   })
+			   .attr("y", 320)
+			   .attr("text-anchor", "middle")
+			   .attr("font-family", "sans-serif")
+			   .attr("font-size", "9px")
+			   .attr("fill", "yellow")
+			   .text(function(d){
+			   return d.month;
+			   });
+	 
+	 
+})
+;}		   
+		   
+</script>
+
+
+
+</html>
