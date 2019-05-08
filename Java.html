@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Java</title>
+	<link rel="icon" href="favicon.ico">
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	
+	<h1>Qual-Stat</h1>
+	<h2>"You are reaching for the sky but remember, <br>you can't improve that which you do not measure"</h2>
+
+<style type="text/css">
+* {font-family:Calibri, Arial, Times new roman}
+
+body {background-image: url("images/forest.jpg");   
+		background-repeat:no-repeat;
+		background-size: 1500px;
+		}
+
+h1 {margin: 30px; font-family:Arial; font-weight:bold; color:rgb(249, 15, 46); text-shadow: -1px 0 black, 0 2px black, 1px 0 black, 0 -1px black ;font-size: 100px; text-align:Center;}
+h2 {margin: 30px; font-family:Arial; font-weight:bold; color:white; background-color: rgb(249, 15, 46,0.8); padding:5px; font-size: 15px; text-align:Center;}
+
+.intro {
+	margin: 30px;
+	color: rgba(16, 16, 16);
+	background-color: rgba(200, 200, 200, 0.8);
+	padding: 10px;
+	font-weight:bold;
+	text-align:left;
+	}
+
+#svgarea {
+	margin: 30px;
+	color: rgba(16, 16, 16);
+	background-color: rgba(200, 200, 200, 0.8);
+	padding: 10px;
+	font-weight:bold;
+	text-align:Center;
+	}
+
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	height: 50px;
+	width: 100%;
+    background-color: grey;
+	color: white;
+	text-align: center;
+	}
+
+</style>
+</head>
+<body>
+
+<div class="intro">
+<p>	
+	intro
+</p> 
+</div>
+
+
+
+<div id="svgarea">
+</div>
+<div class="intro">
+<p>	
+	comments
+</p> 
+</div>
+
+
+<div class="footer">
+  <p>Web Applications Development Module, Eimear Butler G00364802 May 2019</p>
+</div>
+</body>
+
+<script> <!-- JAVA SCRIPT: MAKE SURE TO ADD COMMENTS FOR ALL -->
+<!-- -------------------  -->
+var myArray = [10, 22, 14, 16, 19, 9];
+
+var svgContainer = d3.select("#svgarea").append("svg")
+	.attr("height", 200)
+	.attr("width", 800);
+
+let circles = svgContainer.selectAll("circle")
+	.data(myArray);
+
+circles.enter()
+.append("circle")
+	.attr("cx", function(d, i){return 50 +(i*50);})
+	.attr("cy", 80)
+	.attr("r", function(d){return d;})
+	.attr("fill", "blue");
+<!-- -------------------  -->
+	
+var myRectangle = svgcontainer.append("rect")
+	.attr("x", 50)
+	.attr("y", 50)
+	.attr("height", 100)
+	.attr("width",55)
+	.attr("fill", "blue");
+
+
+
+
+</script>
+
+
+
+</html>
