@@ -2,7 +2,7 @@
 <html lang="en">
 
 <html>
-<head>
+<head>   <!-- NOTE MAJORITY OF COMMENTS ARE ON JAVA PAGE, W3 schools used throughout for reference for attributes/methods etc. -->
 	<title>Landing_Page</title>
 	<link rel="icon" href="favicon.ico"> <!--source https://stackoverflow.com/questions/11488960/how-do-i-put-my-websites-logo-to-be-the-icon-image-in-browser-tabs -->
 	<h1> Log In Required </h1>
@@ -40,15 +40,16 @@ h1 {font-weight:bold; color:white;}
 
 <body>
 
+
 <form action="Home_Page.html">
 	
 	<p id="login"> Username (the email address you registered with): <br><br> 
-		<input type="email"/> <!-- email is automatically validated for format including the @ symbol -->
+		<input type="email" required> <!-- email is automatically validated for format including the @ symbol -->
 			<br><br>
 	
 		Password: <br><br> 
-		<input id="pword" type="password" value="********" required"/>
-		<input type="submit" value="Submit"/>
+		<input id="pword" type="password" value="********" required> <!-- password is also a required field -->
+		<input type="submit" value="Submit"> <!-- submit triggers the form action to validate the input andmove to home page -->
 		<input type="reset">
 	</p>
 	
@@ -58,13 +59,7 @@ h1 {font-weight:bold; color:white;}
 <div class="footer">
   <p>Web Applications Development Module, Eimear Butler G00364802 May 2019</p>
 </div>
+
 </body>
-
-<script> <!-- JAVA SCRIPT: MAKE SURE TO ADD COMMENTS FOR ALL -->
-
-
-</script>
-
-
 
 </html>

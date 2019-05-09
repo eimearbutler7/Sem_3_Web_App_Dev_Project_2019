@@ -2,11 +2,11 @@
 <html lang="en">
 
 <html>
-<head>
+<head>		<!-- NOTE MAJORITY OF COMMENTS ARE ON JAVA PAGE, W3 schools used throughout for reference for attributes/methods etc. -->
 	<title>Home Page</title>
 	<link rel="icon" href="favicon.ico">
 	<h1>Qual-Stat</h1>
-	<h2>"You are reaching for the sky but remember, <br>you can't improve that which you do not measure"</h2>
+	<h2>"You are aiming to climb high but remember, <br>you can't improve that which you do not measure"</h2>
 
 <style type="text/css">
 * {font-family:Calibri, Arial, Times new roman}
@@ -48,7 +48,7 @@ h2 {margin: 30px; font-family:Arial; font-weight:bold; color:white; background-c
 	height: 75px;
 	width: 94%;
 	font-weight:bold; 
-	color: rgb(255, 255, 135, 0); 
+	color: rgb(255, 255, 135, 0);   /* note font is transparent before javascript changes style */ 
 	font-size: 3em; 
 	text-align:center;}
 
@@ -65,7 +65,7 @@ h2 {margin: 30px; font-family:Arial; font-weight:bold; color:white; background-c
 	filter: alpha(opacity=50);
 	}
 
-#jupyter:hover {
+#jupyter:hover {			/*add CSS style to change opacity of image when user hovers over it*/ 
 	opacity:1;
 	filter: alpha(opacity=100);
 	margin:30px;
@@ -96,7 +96,7 @@ h2 {margin: 30px; font-family:Arial; font-weight:bold; color:white; background-c
 
 </style>
 </head>
-<body>
+<body onload="reminder()">
 
 <div class="intro">
 <p>	
@@ -109,7 +109,7 @@ h2 {margin: 30px; font-family:Arial; font-weight:bold; color:white; background-c
 <h3 id="secret">
 Press the big red button to discover what the secret to successful business is!
 </h3>
-<button id="reveal_button" onclick="reveal()">Click to reveal the secret</button>
+<button id="reveal_button" onclick="reveal()">Click to reveal the secret</button> <!--on button click, activate function-->
 
 <div id="reveal">
 <p>Quality Data Analysis!</p>
@@ -124,15 +124,10 @@ Press the big red button to discover what the secret to successful business is!
 <h3 id="example_links">
 Click Below to see some examples of Qual-Stat driving business growth using different coding tools.
 </h3>
-
+			<!-- show 2 pictures which are also links to the next 2 pages-->
 <a href="Jupyter.html" target="_blank"><img src="images/jupyter.png"; id="jupyter"; alt="jupyter_examples"; width="300";  title="jupyter"></a>
-<a href="Java.html" target="_blank"><img src="images/java.jpg"; id="java"; alt="java_examples"; height="150";  title="java"></a>
+<a href="http://localhost:8000/externalData.html" target="_blank"><img src="images/java.jpg"; id="java"; alt="java_examples"; height="150";  title="java"></a>
 </div>
-
-
-
-
-
 
 
 <div class="footer">
@@ -140,8 +135,13 @@ Click Below to see some examples of Qual-Stat driving business growth using diff
 </div>
 </body>
 
-<script> <!-- JAVA SCRIPT: MAKE SURE TO ADD COMMENTS FOR ALL -->
+<script> 
 
+//function to prompt an alert on page load
+function reminder() {
+alert("You are Logged In, call us if you have any questions (Ph: 00364802)") }
+
+//function to change the text opacity value in order to "reveal" the secret text
 function reveal() {
 document.getElementById("reveal").style.color = "yellow";}
 
