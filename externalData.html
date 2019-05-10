@@ -14,7 +14,7 @@
 * {font-family:Calibri, Arial, Times new roman}    /* text style set for the whole page */
 
 body {background-image: url("images/forest.jpg");   /* background image set */
-		background-repeat:no-repeat;
+		background-repeat:repeat-y;
 		background-size: 1500px;
 		}
 
@@ -42,7 +42,7 @@ h2 {margin: 30px; font-family:Arial; font-weight:bold; color:white; background-c
 
 #circlediv2 {
 	float:left; 		/* circles output is also floated up beside circlediv1 */
-	height: 180px;
+	height: 170px;
 	width: 500px;
 	margin-left: 30px;
 	color: rgba(16, 16, 16);
@@ -217,12 +217,12 @@ function drawChart(){
 	//create Y scale									//data is scaled relative to its container to ensure all images are shown
 	var yScale = d3.scaleLinear()
 		.domain([0, d3.max(data, function(d){return d.complaints_received;})])
-		.range([300,0]);
+		.range([0,300]);     			//height of chart
 
 	//create X scale
 	var xScale = d3.scaleBand()							//data is scaled relative to its container to ensure all images are shown
 		.domain(data.map(function(d){return d.month;}))
-		.range([252,0]);
+		.range([252,0]);				//width of chart
 
 	// create an svg container using d3 select append it into the right div
 	var svgContainer = d3.select("#myDiv2").append("svg")
@@ -361,7 +361,7 @@ function drawaxis(){
 
 		//append y axis
 		svgContainer.append("g")					//creates axis and complaints received values and appends it to our svgcontainer 
-			.attr("transform", "translate(45,0)")
+			.attr("transform", "translate(45,0)")    //position axis
 			.call(yAxis);
 		
 		//append x axis
@@ -432,10 +432,10 @@ function add_data() {
 				.attr("x", function(d,i){
 				   return 50 + (i*21);
 				   })
-				.attr("y", function(d){return 300-yScale(d.complaints_received);})
+				.attr("y", function(d){return yScale(d.complaints_received);})
 				.attr("width", 20)
 				.attr("height",function(d){
-				   return yScale(d.complaints_received);
+				   return 300-yScale(d.complaints_received);
 				   })
 				.attr("fill", "black");
 })
@@ -496,10 +496,10 @@ function cChange() {
 				.attr("x", function(d,i){
 				   return 50 + (i*21);
 				   })
-				.attr("y", function(d){return 300-yScale(d.complaints_received);})
+				.attr("y", function(d){return yScale(d.complaints_received);})
 				.attr("width", 20)
 				.attr("height",function(d){
-				   return yScale(d.complaints_received);
+				   return 300-yScale(d.complaints_received);
 				   })
 				.attr("fill", document.getElementById("colorPicker2").value); //user input is included in this function to allow user to change color using dropdown in body 
 })
